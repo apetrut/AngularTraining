@@ -1,0 +1,77 @@
+<div class="card-body">
+  <form novalidate
+        #bookForm="ngForm"> <!-- export the ngForm directive into a template reference variable -->
+    <fieldset>
+      <legend>Basic book Information</legend>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label"
+               for="bookNameId">book Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="bookNameId"
+                 type="text"
+                 placeholder="Name (required)"
+                 required
+                 minlength="3"
+                 [(ngModel)]=book.bookTitle
+                 name="bookName"
+                 #bookNameVar="ngModel"
+                 [ngClass]="{'is-invalid': (bookNameVar.touched || 
+                                            bookNameVar.dirty ||
+                                            book.id !== 0) && 
+                                            !bookNameVar.valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="bookNameVar.errors?.required">
+              book name is required.
+            </span>
+            <span *ngIf="bookNameVar.errors?.minlength">
+              book name must be at least three characters.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label"
+               for="bookCodeId">book Code</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="bookCodeId"
+                 type="text"
+                 placeholder="Code (required)"
+                 required
+                 [(ngModel)]=book.ISBN
+                 name="ISBN"
+                 #bookCodeVar="ngModel"
+                 [ngClass]="{'is-invalid': (bookCodeVar.touched || 
+                                            bookCodeVar.dirty ||
+                                            book.id !== 0) &&
+                                            !bookCodeVar.valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="bookCodeVar.errors?.required">
+              book code is required.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label"
+               for="descriptionId">Description</label>
+        <div class="col-md-8">
+          <textarea class="form-control"
+                    id="descriptionId"
+                    placeholder="Description"
+                    rows=3
+                    [(ngModel)]=book.description
+                    name="description"></textarea>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<div class='alert alert-danger'
+     *ngIf='errorMessage'>{{errorMessage}}
+</div>
