@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   templateUrl: './register.component.html'
@@ -11,7 +12,7 @@ export class RegisterComponent implements OnInit {
   errorMessage: string;
   pageTitle: 'Register new user';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -23,14 +24,14 @@ export class RegisterComponent implements OnInit {
   register() {
     this.authService.register(this.registerForm.value)
       .subscribe(() => {
-        console.log('registration successful');
+        this.alertify.success('registration successful');
       }, error => {
-        console.log(error);
+        this.alertify.error(error);
       });
   }
 
   cancel(){
-    console.log('cancelled');
+    this.alertify.message('cancelled');
   }
 
 }

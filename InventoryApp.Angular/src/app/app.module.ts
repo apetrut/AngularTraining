@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './_services/auth.service';
 import { RegisterComponent } from './register/register/register.component';
 import { ErrorInterceptorProvider } from './_interceptors/errorInterceptor';
+import { BsDropdownModule } from 'node_modules/ngx-bootstrap/dropdown';
 
 @NgModule({
    declarations: [
@@ -29,11 +30,12 @@ import { ErrorInterceptorProvider } from './_interceptors/errorInterceptor';
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
+      BsDropdownModule.forRoot(),
       RouterModule.forRoot([
         { path: 'register', component: RegisterComponent },
         { path: 'welcome', component: WelcomeComponent },
         { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-        { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+        { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
    ]
    // {preloadingStrategy: [
    //    PreloadAllModules//loadalllazilyloadedmodulesASAP
