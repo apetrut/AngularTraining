@@ -1,0 +1,600 @@
+[
+    {
+      "BookTitle": "Holden",
+      "ISBN": "46e8a955-a7d4-4ed8-b5b6-31e3a589f816",
+      "Author": "Salas",
+      "Description": "Anim excepteur occaecat fugiat sint sit cillum duis veniam esse commodo.",
+      "PublishedDate": "2016-12-05T08:34:40 -02:00",
+      "Price": 95,
+      "StarRating": 4,
+      "Tags": [
+        {
+          "Name": "consequat"
+        },
+        {
+          "Name": "nulla"
+        },
+        {
+          "Name": "nostrud"
+        },
+        {
+          "Name": "excepteur"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Casey",
+      "ISBN": "47ecd757-cebc-4c83-b7b7-9c6181b96d1d",
+      "Author": "Schultz",
+      "Description": "Incididunt Lorem duis pariatur ullamco fugiat consequat deserunt eu.",
+      "PublishedDate": "2015-06-05T11:04:50 -03:00",
+      "Price": 66,
+      "StarRating": 3,
+      "Tags": [
+        {
+          "Name": "est"
+        },
+        {
+          "Name": "do"
+        },
+        {
+          "Name": "esse"
+        },
+        {
+          "Name": "et"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Doreen",
+      "ISBN": "2c7d8da8-c9ee-482f-b693-1773a4108df9",
+      "Author": "Gordon",
+      "Description": "Aliquip ea do ullamco cupidatat laboris dolore ut minim eiusmod nulla qui sint.",
+      "PublishedDate": "2014-07-26T12:04:22 -03:00",
+      "Price": 23,
+      "StarRating": 0,
+      "Tags": [
+        {
+          "Name": "officia"
+        },
+        {
+          "Name": "pariatur"
+        },
+        {
+          "Name": "in"
+        },
+        {
+          "Name": "irure"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Ford",
+      "ISBN": "fca52fad-77b8-4815-a58c-a52ae9503633",
+      "Author": "Arnold",
+      "Description": "Cillum officia ipsum irure tempor duis enim duis cupidatat elit eu minim sunt.",
+      "PublishedDate": "2017-09-27T06:24:39 -03:00",
+      "Price": 79,
+      "StarRating": 1,
+      "Tags": [
+        {
+          "Name": "minim"
+        },
+        {
+          "Name": "labore"
+        },
+        {
+          "Name": "culpa"
+        },
+        {
+          "Name": "velit"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Riddle",
+      "ISBN": "a57dfaa6-c47b-4e0a-8987-449064138a89",
+      "Author": "Bird",
+      "Description": "Culpa minim commodo occaecat eu ea qui consequat.",
+      "PublishedDate": "2015-05-29T12:58:24 -03:00",
+      "Price": 5,
+      "StarRating": 5,
+      "Tags": [
+        {
+          "Name": "minim"
+        },
+        {
+          "Name": "ea"
+        },
+        {
+          "Name": "proident"
+        },
+        {
+          "Name": "deserunt"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Stefanie",
+      "ISBN": "2b71abbc-cba5-4856-8664-f661e817bf21",
+      "Author": "Faulkner",
+      "Description": "Reprehenderit sunt ullamco ad excepteur est deserunt deserunt nisi sint cillum minim pariatur enim.",
+      "PublishedDate": "2015-08-07T09:09:30 -03:00",
+      "Price": 40,
+      "StarRating": 3,
+      "Tags": [
+        {
+          "Name": "do"
+        },
+        {
+          "Name": "ullamco"
+        },
+        {
+          "Name": "sint"
+        },
+        {
+          "Name": "quis"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Atkins",
+      "ISBN": "cb2452cd-f31e-463e-ba73-3cad206a92e3",
+      "Author": "Boyd",
+      "Description": "Irure voluptate nulla ex sint cupidatat do mollit non tempor proident proident adipisicing.",
+      "PublishedDate": "2019-10-15T01:10:39 -03:00",
+      "Price": 20,
+      "StarRating": 3,
+      "Tags": [
+        {
+          "Name": "in"
+        },
+        {
+          "Name": "cupidatat"
+        },
+        {
+          "Name": "nulla"
+        },
+        {
+          "Name": "voluptate"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Miranda",
+      "ISBN": "f58a9995-cb5e-43a6-b9a0-e7fc85043cb7",
+      "Author": "Salazar",
+      "Description": "Deserunt velit dolor nostrud excepteur.",
+      "PublishedDate": "2017-12-17T07:57:39 -02:00",
+      "Price": 37,
+      "StarRating": 1,
+      "Tags": [
+        {
+          "Name": "sunt"
+        },
+        {
+          "Name": "aliqua"
+        },
+        {
+          "Name": "ad"
+        },
+        {
+          "Name": "sit"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Vicky",
+      "ISBN": "eed352df-9dfd-46f5-b70e-88444173329f",
+      "Author": "Mcclain",
+      "Description": "Occaecat in fugiat enim amet sit do fugiat anim irure non magna in.",
+      "PublishedDate": "2016-10-19T08:33:38 -03:00",
+      "Price": 7,
+      "StarRating": 4,
+      "Tags": [
+        {
+          "Name": "occaecat"
+        },
+        {
+          "Name": "voluptate"
+        },
+        {
+          "Name": "fugiat"
+        },
+        {
+          "Name": "laboris"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Becker",
+      "ISBN": "1077b9b2-059a-487d-a946-41b25e2cbdb0",
+      "Author": "Koch",
+      "Description": "Dolore labore cillum amet dolore fugiat minim commodo consectetur ea ad enim.",
+      "PublishedDate": "2016-07-07T03:47:13 -03:00",
+      "Price": 55,
+      "StarRating": 2,
+      "Tags": [
+        {
+          "Name": "non"
+        },
+        {
+          "Name": "irure"
+        },
+        {
+          "Name": "consectetur"
+        },
+        {
+          "Name": "veniam"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Sawyer",
+      "ISBN": "d9aeecce-34ee-4f00-9c2c-5d4669f81a01",
+      "Author": "Robertson",
+      "Description": "Voluptate veniam anim ad incididunt deserunt reprehenderit laboris laborum non officia cillum.",
+      "PublishedDate": "2014-01-20T02:20:11 -02:00",
+      "Price": 87,
+      "StarRating": 4,
+      "Tags": [
+        {
+          "Name": "in"
+        },
+        {
+          "Name": "adipisicing"
+        },
+        {
+          "Name": "mollit"
+        },
+        {
+          "Name": "consectetur"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Mia",
+      "ISBN": "2918f41a-0fb9-423b-a348-21106362e1dd",
+      "Author": "Mendoza",
+      "Description": "Do ullamco est irure occaecat laborum ut tempor.",
+      "PublishedDate": "2019-11-01T10:34:36 -02:00",
+      "Price": 84,
+      "StarRating": 3,
+      "Tags": [
+        {
+          "Name": "ad"
+        },
+        {
+          "Name": "enim"
+        },
+        {
+          "Name": "officia"
+        },
+        {
+          "Name": "quis"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Celeste",
+      "ISBN": "282d2e54-9854-44dd-b178-f224e45eee9f",
+      "Author": "Banks",
+      "Description": "Dolore proident id do eu aliquip labore dolore non.",
+      "PublishedDate": "2016-06-20T03:29:35 -03:00",
+      "Price": 62,
+      "StarRating": 0,
+      "Tags": [
+        {
+          "Name": "ullamco"
+        },
+        {
+          "Name": "minim"
+        },
+        {
+          "Name": "commodo"
+        },
+        {
+          "Name": "amet"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Murphy",
+      "ISBN": "7ebe1093-981e-49ff-b8c3-152f831f6491",
+      "Author": "Roy",
+      "Description": "Aliqua sunt laborum officia ipsum adipisicing ea aute.",
+      "PublishedDate": "2015-08-02T03:35:43 -03:00",
+      "Price": 18,
+      "StarRating": 3,
+      "Tags": [
+        {
+          "Name": "anim"
+        },
+        {
+          "Name": "adipisicing"
+        },
+        {
+          "Name": "duis"
+        },
+        {
+          "Name": "do"
+        }
+      ]
+    },
+    {
+      "BookTitle": "James",
+      "ISBN": "aead08fb-f099-4493-8475-46e9b5a6e447",
+      "Author": "Suarez",
+      "Description": "Consequat nostrud cupidatat eu duis anim duis ullamco sit excepteur.",
+      "PublishedDate": "2017-02-03T10:44:30 -02:00",
+      "Price": 100,
+      "StarRating": 4,
+      "Tags": [
+        {
+          "Name": "ut"
+        },
+        {
+          "Name": "eu"
+        },
+        {
+          "Name": "pariatur"
+        },
+        {
+          "Name": "nostrud"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Potts",
+      "ISBN": "42c3da6f-0752-41af-a8e7-88b759234643",
+      "Author": "Cotton",
+      "Description": "Reprehenderit adipisicing sit est tempor duis ipsum cillum ut.",
+      "PublishedDate": "2016-03-14T04:10:17 -02:00",
+      "Price": 61,
+      "StarRating": 1,
+      "Tags": [
+        {
+          "Name": "ipsum"
+        },
+        {
+          "Name": "et"
+        },
+        {
+          "Name": "duis"
+        },
+        {
+          "Name": "amet"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Woodward",
+      "ISBN": "b978ad50-76c0-47ea-b9a5-0b6d2b35a57d",
+      "Author": "Phillips",
+      "Description": "Laboris nisi ipsum nulla tempor consequat aute.",
+      "PublishedDate": "2020-01-19T03:57:00 -02:00",
+      "Price": 15,
+      "StarRating": 1,
+      "Tags": [
+        {
+          "Name": "ea"
+        },
+        {
+          "Name": "incididunt"
+        },
+        {
+          "Name": "non"
+        },
+        {
+          "Name": "culpa"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Gracie",
+      "ISBN": "c6b893c4-10b7-4d89-a0c1-45ae64958001",
+      "Author": "Waters",
+      "Description": "Adipisicing magna ut aliquip Lorem cillum et magna qui.",
+      "PublishedDate": "2018-04-22T09:39:54 -03:00",
+      "Price": 91,
+      "StarRating": 3,
+      "Tags": [
+        {
+          "Name": "culpa"
+        },
+        {
+          "Name": "laborum"
+        },
+        {
+          "Name": "excepteur"
+        },
+        {
+          "Name": "mollit"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Mercer",
+      "ISBN": "cc22b9d7-c8bd-401e-b2f2-d1f204375a43",
+      "Author": "Meyer",
+      "Description": "Commodo excepteur sunt labore ex sint.",
+      "PublishedDate": "2016-08-28T02:56:30 -03:00",
+      "Price": 32,
+      "StarRating": 5,
+      "Tags": [
+        {
+          "Name": "sint"
+        },
+        {
+          "Name": "laborum"
+        },
+        {
+          "Name": "in"
+        },
+        {
+          "Name": "reprehenderit"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Stephens",
+      "ISBN": "6069ec2e-9a15-4615-b62c-db5b77605098",
+      "Author": "Richardson",
+      "Description": "Aliqua sint ex non ex est ad.",
+      "PublishedDate": "2014-09-04T01:07:08 -03:00",
+      "Price": 41,
+      "StarRating": 4,
+      "Tags": [
+        {
+          "Name": "id"
+        },
+        {
+          "Name": "excepteur"
+        },
+        {
+          "Name": "magna"
+        },
+        {
+          "Name": "laboris"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Vicki",
+      "ISBN": "8787b835-14a4-40c1-a2ab-5433b8d5ec08",
+      "Author": "Tanner",
+      "Description": "In cillum in reprehenderit Lorem consectetur consectetur labore exercitation sint nulla.",
+      "PublishedDate": "2017-10-20T04:52:45 -03:00",
+      "Price": 86,
+      "StarRating": 1,
+      "Tags": [
+        {
+          "Name": "aute"
+        },
+        {
+          "Name": "elit"
+        },
+        {
+          "Name": "pariatur"
+        },
+        {
+          "Name": "duis"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Wilcox",
+      "ISBN": "c8de4b15-3329-4b34-8f0f-3150fbe879ee",
+      "Author": "Burke",
+      "Description": "Reprehenderit consequat officia ad cupidatat dolore quis esse eiusmod velit duis voluptate irure.",
+      "PublishedDate": "2016-08-28T03:39:19 -03:00",
+      "Price": 69,
+      "StarRating": 5,
+      "Tags": [
+        {
+          "Name": "veniam"
+        },
+        {
+          "Name": "non"
+        },
+        {
+          "Name": "officia"
+        },
+        {
+          "Name": "tempor"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Dalton",
+      "ISBN": "97e9adc8-8dfb-4d76-ae5e-39c3e3ac802c",
+      "Author": "Mcdonald",
+      "Description": "Qui mollit ut laborum esse ipsum exercitation qui quis laboris reprehenderit do dolore quis.",
+      "PublishedDate": "2015-01-24T05:03:08 -02:00",
+      "Price": 87,
+      "StarRating": 3,
+      "Tags": [
+        {
+          "Name": "est"
+        },
+        {
+          "Name": "eiusmod"
+        },
+        {
+          "Name": "tempor"
+        },
+        {
+          "Name": "ipsum"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Freida",
+      "ISBN": "8b923913-3a91-48d4-be26-c485553cc39e",
+      "Author": "Reynolds",
+      "Description": "Esse exercitation esse id et proident dolor nulla labore.",
+      "PublishedDate": "2014-01-27T01:25:07 -02:00",
+      "Price": 7,
+      "StarRating": 3,
+      "Tags": [
+        {
+          "Name": "non"
+        },
+        {
+          "Name": "aliquip"
+        },
+        {
+          "Name": "consequat"
+        },
+        {
+          "Name": "elit"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Daniel",
+      "ISBN": "4818bc73-d9ec-4a5a-8f3d-0a7d84c00068",
+      "Author": "Turner",
+      "Description": "Ipsum magna duis ut sunt occaecat amet aute exercitation deserunt esse velit sint tempor anim.",
+      "PublishedDate": "2016-05-14T10:53:23 -03:00",
+      "Price": 38,
+      "StarRating": 1,
+      "Tags": [
+        {
+          "Name": "magna"
+        },
+        {
+          "Name": "sit"
+        },
+        {
+          "Name": "do"
+        },
+        {
+          "Name": "est"
+        }
+      ]
+    },
+    {
+      "BookTitle": "Concetta",
+      "ISBN": "23b87b30-5893-459b-8cab-d52414d86665",
+      "Author": "Rosario",
+      "Description": "Minim irure ad excepteur mollit laboris dolore cupidatat.",
+      "PublishedDate": "2019-06-17T12:28:24 -03:00",
+      "Price": 82,
+      "StarRating": 0,
+      "Tags": [
+        {
+          "Name": "deserunt"
+        },
+        {
+          "Name": "anim"
+        },
+        {
+          "Name": "sunt"
+        },
+        {
+          "Name": "aliqua"
+        }
+      ]
+    }
+  ]

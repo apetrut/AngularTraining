@@ -23,6 +23,7 @@ namespace DatingApp.API
                     context.Database.Migrate();
 
                     Seed.SeedProducts(context);
+                    Seed.SeedBooks(context);
                 }
                 catch(Exception ex)
                 {

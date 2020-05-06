@@ -24,5 +24,22 @@ namespace DatingApp.API.Data
                 dataContext.SaveChanges();
             }
         }
+
+        public static void SeedBooks(DataContext dataContext)
+        {
+            if (!dataContext.Books.Any())
+            {
+                var bookData = System.IO.File.ReadAllText("Data/Seed/BooksSeedData.json");
+
+                var books = JsonConvert.DeserializeObject<List<Book>>(bookData);
+
+                foreach (var book in books)
+                {
+                    dataContext.Books.Add(book);
+                }
+
+                dataContext.SaveChanges();
+            }
+        }
     }
 }
