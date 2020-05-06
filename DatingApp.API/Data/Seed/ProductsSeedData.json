@@ -1,0 +1,187 @@
+[
+  {
+    "ProductName": "Tanner",
+    "ProductCode": "f999cfd0-4467-4f98-8ce1-74c80d6f1496",
+    "ReleaseDate": "2015-06-26T09:46:49 -03:00",
+    "Price": 18,
+    "StarRating": 2,
+    "tags": [
+      {
+        "Name": "officia"
+      },
+      {
+        "Name": "veniam"
+      },
+      {
+        "Name": "id"
+      },
+      {
+        "Name": "non"
+      },
+      {
+        "Name": "cupidatat"
+      },
+      {
+        "Name": "aute"
+      },
+      {
+        "Name": "consectetur"
+      }
+    ],
+    "Photos": [
+      {
+        "url": "assets/images/26.png",
+        "isMain": true,
+        "description": "Labore enim duis aute fugiat deserunt in pariatur cupidatat irure est non eu elit."
+      }
+    ]
+  },
+  {
+    "ProductName": "Alba",
+    "ProductCode": "0d4645a3-c951-4ef4-ab1f-c0ff1b1b949d",
+    "ReleaseDate": "2019-01-31T08:38:14 -02:00",
+    "Price": 90,
+    "StarRating": 4,
+    "tags": [
+      {
+        "Name": "cillum"
+      },
+      {
+        "Name": "in"
+      },
+      {
+        "Name": "et"
+      },
+      {
+        "Name": "in"
+      },
+      {
+        "Name": "sit"
+      },
+      {
+        "Name": "occaecat"
+      },
+      {
+        "Name": "ipsum"
+      }
+    ],
+    "Photos": [
+      {
+        "url": "assets/images/71.png",
+        "isMain": true,
+        "description": "Incididunt duis adipisicing ea proident reprehenderit est cupidatat fugiat in excepteur tempor."
+      }
+    ]
+  },
+  {
+    "ProductName": "Carmen",
+    "ProductCode": "573a52c5-4b4d-4e85-9ee7-ba0960df79d8",
+    "ReleaseDate": "2019-02-01T12:52:57 -02:00",
+    "Price": 43,
+    "StarRating": 1,
+    "tags": [
+      {
+        "Name": "esse"
+      },
+      {
+        "Name": "ea"
+      },
+      {
+        "Name": "dolor"
+      },
+      {
+        "Name": "ex"
+      },
+      {
+        "Name": "minim"
+      },
+      {
+        "Name": "eiusmod"
+      },
+      {
+        "Name": "adipisicing"
+      }
+    ],
+    "Photos": [
+      {
+        "url": "assets/images/65.png",
+        "isMain": true,
+        "description": "Aute culpa sint culpa ipsum esse nostrud sit proident labore deserunt anim."
+      }
+    ]
+  },
+  {
+    "ProductName": "Gilmore",
+    "ProductCode": "3d7bf45b-7608-4372-88ff-7aed2467eb1b",
+    "ReleaseDate": "2018-11-25T11:25:40 -02:00",
+    "Price": 56,
+    "StarRating": 1,
+    "tags": [
+      {
+        "Name": "laboris"
+      },
+      {
+        "Name": "commodo"
+      },
+      {
+        "Name": "est"
+      },
+      {
+        "Name": "nulla"
+      },
+      {
+        "Name": "nisi"
+      },
+      {
+        "Name": "nostrud"
+      },
+      {
+        "Name": "voluptate"
+      }
+    ],
+    "Photos": [
+      {
+        "url": "assets/images/60.png",
+        "isMain": true,
+        "description": "Quis commodo fugiat adipisicing veniam sint eu minim velit veniam et."
+      }
+    ]
+  },
+  {
+    "ProductName": "Rosemarie",
+    "ProductCode": "80f2b98d-8452-4c3f-95f6-976c7f6a13ae",
+    "ReleaseDate": "2019-08-27T04:23:46 -03:00",
+    "Price": 18,
+    "StarRating": 5,
+    "tags": [
+      {
+        "Name": "nisi"
+      },
+      {
+        "Name": "dolore"
+      },
+      {
+        "Name": "excepteur"
+      },
+      {
+        "Name": "cillum"
+      },
+      {
+        "Name": "adipisicing"
+      },
+      {
+        "Name": "fugiat"
+      },
+      {
+        "Name": "Lorem"
+      }
+    ],
+    "Photos": [
+      {
+        "url": "assets/images/22.png",
+        "isMain": true,
+        "description": "Occaecat elit velit nulla ea officia cupidatat eu excepteur laborum."
+      }
+    ]
+  }
+]

@@ -20,5 +20,7 @@ namespace DatingApp.API.Models
         public string ImageUrl { get; set; }
 
         public List<Tag> Tags { get; set; }
+
+        public ICollection<Photo> Photos { get; set; }
     }
 }
