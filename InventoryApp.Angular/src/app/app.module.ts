@@ -2,26 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { RouterModule, PreloadAllModules } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { ProductModule } from './products/product.module';
 import { BookModule } from './books/book.module';
-import { AddHeaderInterceptor } from './shared/add-header.interceptor';
-import { LogResponseInterceptor } from './shared/log-response.interceptor';
-import { NavComponent } from './nav/nav.component';
+import { AddHeaderInterceptor } from './_interceptors/add-header.interceptor';
+import { LogResponseInterceptor } from './_interceptors/log-response.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './_services/auth.service';
 import { RegisterComponent } from './register/register/register.component';
 import { ErrorInterceptorProvider } from './_interceptors/errorInterceptor';
 import { BsDropdownModule } from 'node_modules/ngx-bootstrap/dropdown';
+import { appRoutes } from './routes';
 
 @NgModule({
    declarations: [
       AppComponent,
       WelcomeComponent,
-      NavComponent,
       RegisterComponent
    ],
    imports: [
@@ -31,18 +30,9 @@ import { BsDropdownModule } from 'node_modules/ngx-bootstrap/dropdown';
       FormsModule,
       ReactiveFormsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot([
-        { path: 'register', component: RegisterComponent },
-        { path: 'welcome', component: WelcomeComponent },
-        { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-        { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
-   ]
-   // {preloadingStrategy: [
-   //    PreloadAllModules//loadalllazilyloadedmodulesASAP
-   // ]}
-),
-    ProductModule,
-    BookModule
+      RouterModule.forRoot(appRoutes),
+      ProductModule,
+      BookModule
   ],
   providers: [
     AuthService,

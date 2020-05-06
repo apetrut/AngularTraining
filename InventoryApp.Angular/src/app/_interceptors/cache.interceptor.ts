@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpEvent, HttpHandler, HttpResponse } from '@angular/common/http';
-import { HttpCacheService } from './http-cache.service';
+import { HttpCacheService } from '../shared/http-cache.service';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
-export class CacheInterceptor implements HttpInterceptor{
+export class CacheInterceptor implements HttpInterceptor {
 
     constructor(private cacheService: HttpCacheService) {}
 
