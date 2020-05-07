@@ -3,12 +3,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Book } from '../models/book';
+import { environment } from 'src/environments/environment';
+
+// const httpOptions = {
+//   headers: new HttpHeaders({
+//     Authorization: 'Bearer ' + localStorage.getItem('token')
+//   })
+// };
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private booksUrl = 'http://localhost:5000/api/books';
+  private booksUrl = environment.apiUrl + 'books';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +24,7 @@ export class BookService {
       .pipe(
         tap(book => {
           console.log(this.booksUrl);
-          console.log(JSON.stringify(book));
+          // console.log(JSON.stringify(book));
         }),
         catchError(this.handleError)
       );
@@ -30,7 +37,8 @@ export class BookService {
     const url = `${this.booksUrl}/${id}`;
     return this.http.get<Book>(url)
       .pipe(
-        tap(data => console.log('getBook: ' + JSON.stringify(data))),
+        tap(data =>
+          console.log('getBook: ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }

@@ -4,20 +4,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
-import { Product } from './product';
+import { Product } from '../models/product';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
-  private productsUrl = 'http://localhost:5000/api/products';
+  private productsUrl = environment.apiUrl + 'products';
 
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.productsUrl)
       .pipe(
-        tap(data => console.log(JSON.stringify(data))),
+        // tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)
       );
   }

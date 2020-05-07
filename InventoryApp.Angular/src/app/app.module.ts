@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
@@ -15,7 +16,12 @@ import { AuthService } from './_services/auth.service';
 import { RegisterComponent } from './register/register/register.component';
 import { ErrorInterceptorProvider } from './_interceptors/errorInterceptor';
 import { BsDropdownModule } from 'node_modules/ngx-bootstrap/dropdown';
+import { TabsModule } from 'node_modules/ngx-bootstrap/tabs';
 import { appRoutes } from './routes';
+
+export function tokenGetter(){
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -32,7 +38,15 @@ import { appRoutes } from './routes';
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       ProductModule,
-      BookModule
+      BookModule,
+      TabsModule.forRoot(),
+      JwtModule.forRoot({
+         config: {
+            tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      })
   ],
   providers: [
     AuthService,

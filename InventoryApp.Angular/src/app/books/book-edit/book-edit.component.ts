@@ -2,11 +2,11 @@ import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl, FormControlName } from '@angular/forms';
 import { Subscription, Observable, fromEvent, merge } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Book } from '../models/book';
+import { Book } from '../../models/book';
 import { debounceTime } from 'rxjs/operators';
-import { GenericValidator } from '../shared/generic-validator';
-import { NumberValidators } from '../shared/number.validator';
-import { BookService } from './book.service';
+import { GenericValidator } from '../../shared/generic-validator';
+import { NumberValidators } from '../../shared/number.validator';
+import { BookService } from '../../_services/book.service';
 
 @Component({
   templateUrl: './book-edit.component.html'

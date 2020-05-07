@@ -9,6 +9,8 @@ namespace DatingApp.API.DTOs
 
         public string BookTitle { get; set; }
 
+        public string ISBN { get; set; }
+
         [DisplayFormat(DataFormatString="{0:d}")]
         public DateTime PublishedDate { get; set; }
 

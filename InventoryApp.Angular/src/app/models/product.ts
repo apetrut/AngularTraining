@@ -1,3 +1,5 @@
+import { Photo } from './Photo';
+
 /* Defines the product entity */
 export interface Product {
   id: number;
@@ -9,5 +11,6 @@ export interface Product {
   description: string;
   starRating: number;
   imageUrl: string;
+  photos?: Photo[];
 }
 

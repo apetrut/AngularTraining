@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription, fromEvent, merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { Product } from './product';
-import { ProductService } from './product.service';
+import { Product } from '../models/product';
+import { ProductService } from '../_services/product.service';
 
 import { NumberValidators } from '../shared/number.validator';
 import { GenericValidator } from '../shared/generic-validator';

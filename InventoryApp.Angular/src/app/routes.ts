@@ -6,19 +6,24 @@ import { ProductDetailComponent } from './products/product-detail.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ProductEditGuard } from './_guards/product-edit.guard';
 import { ProductEditComponent } from './products/product-edit.component';
-import { BookListComponent } from './books/book-list.component';
-import { BookDetailComponent } from './books/book-detail.component';
-import { BookResolverService } from './books/book-resolver.service';
-import { BookEditComponent } from './books/book-edit.component';
+import { BookListComponent } from './books/book-list/book-list.component';
+import { BookDetailComponent } from './books/book-detail/book-detail.component';
+import { BookListResolver } from './_resolvers/book-list.resolver';
+import { BookEditComponent } from './books/book-edit/book-edit.component';
 import { BookEditInfoComponent } from './books/book-edit/book-edit-info.component';
 import { BookEditTagsComponent } from './books/book-edit/book-edit-tags.component';
+import { BookDetailResolver } from './_resolvers/book-detail.resolver';
 
 export const bookRoutes: Routes = [
-  { path: 'books', component: BookListComponent, canActivate: [AuthGuard] },
+  { path: 'books',
+    component: BookListComponent,
+    canActivate: [AuthGuard],
+    resolve: { resolvedBooks: BookListResolver }
+  },
   {
     path: 'books/:id',
     component: BookDetailComponent,
-    resolve: { resolvedData : BookResolverService }
+    resolve: { resolvedBook : BookDetailResolver }
   },
   {
     path: 'books/:id/edit',

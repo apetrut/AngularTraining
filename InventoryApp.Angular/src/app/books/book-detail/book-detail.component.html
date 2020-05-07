@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <img clas="card-img-top img-thumbnail" src="{{book.bookImageUrl}}" alt="{{book.bookTitle}}" height="200" width="200">
+                <div clas="card-body">
+                    <div>
+                        <strong>Author:</strong>
+                        <p>{{book.author}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="tab-panel">
+                <tabset>
+                    <tab heading="About {{book?.bookTitle}}">
+                        <h4>Description</h4>
+                        <p>{{book.description}}</p>
+                    </tab>
+                    <tab heading="ISBN">
+                        <p>{{book.ISBN}}</p>
+                    </tab>
+                    <tab heading="Other Details">
+                        <h4>Other details</h4>
+                        <p>Price: {{book.price}}</p>
+                        <p>Star rating: {{book.starRating}}</p>
+                        <p>Topic: {{book.topic}}</p>
+                        <p>Tags: {{book.tags}}</p>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>
