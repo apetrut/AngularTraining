@@ -5,8 +5,18 @@
                 <img clas="card-img-top img-thumbnail" src="{{book.bookImageUrl}}" alt="{{book.bookTitle}}" height="200" width="200">
                 <div clas="card-body">
                     <div>
+                        <strong>Book name:</strong>
+                        <p>{{book.bookTitle}}</p>
+                    </div>
+                    <div>
                         <strong>Author:</strong>
                         <p>{{book.author}}</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-primary btn-sm"
+                                [routerLink]="['/books', book.id, 'edit']">
+                            Edit
+                         </button>
                     </div>
                 </div>
             </div>

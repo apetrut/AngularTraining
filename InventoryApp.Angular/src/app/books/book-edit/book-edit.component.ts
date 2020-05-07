@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChildren, HostListener } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl, FormControlName } from '@angular/forms';
 import { Subscription, Observable, fromEvent, merge } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { debounceTime } from 'rxjs/operators';
 import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
 import { BookService } from '../../_services/book.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   templateUrl: './book-edit.component.html'
@@ -26,6 +27,14 @@ export class BookEditComponent implements OnInit {
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
 
+  @HostListener('window:beforeunload', ['event'])
+  unloadNotification($event: any) {
+    if (this.bookForm.dirty)
+    {
+        $event.returnValue = true;
+    }
+  }
+
   get tags(): FormArray {
     return this.bookForm.get('tags') as FormArray;
   }
@@ -33,15 +42,16 @@ export class BookEditComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
+              private alertify: AlertifyService,
               private bookService: BookService) {
 
     // Defines all of the validation messages for the form.
     // These could instead be retrieved from a file or database.
     this.validationMessages = {
       bookTitle: {
-        required: 'book title is required.',
-        minlength: 'book title must be at least three characters.',
-        maxlength: 'book title cannot exceed 50 characters.'
+        required: 'The book title is required.',
+        minlength: 'Book title must be at least three characters.',
+        maxlength: 'Book title cannot exceed 50 characters.'
       },
       ISBN: {
         required: 'ISBN is required.'
@@ -59,10 +69,10 @@ export class BookEditComponent implements OnInit {
   // ensure the component + templates are initialized before the form model.
   ngOnInit(): void {
     this.bookForm = this.fb.group({
-      bookName: ['', [Validators.required,
+      bookTitle: ['', [Validators.required,
                          Validators.minLength(3),
                          Validators.maxLength(50)]],
-      bookCode: ['', Validators.required],
+      ISBN: ['', Validators.required],
       starRating: ['', NumberValidators.range(1, 5)],
       tags: this.fb.array([]), 
       description: ''
@@ -119,6 +129,8 @@ export class BookEditComponent implements OnInit {
     }
     this.book = book;
 
+    console.log(this.book);
+
     if (this.book.id === 0) {
       this.pageTitle = 'Add book';
     } else {
@@ -127,7 +139,7 @@ export class BookEditComponent implements OnInit {
 
     // Update the data on the form
     this.bookForm.patchValue({
-      bookName: this.book.bookTitle,
+      bookTitle: this.book.bookTitle,
       ISBN: this.book.ISBN,
       starRating: this.book.starRating,
       description: this.book.description
@@ -161,13 +173,17 @@ export class BookEditComponent implements OnInit {
           this.bookService.createBook(p)
             .subscribe({
               next: () => this.onSaveComplete(),
-              error: err => this.errorMessage = err
+              error: err => {
+                this.alertify.error(err);
+              }
             });
         } else {
           this.bookService.updateBook(p)
             .subscribe({
               next: () => this.onSaveComplete(),
-              error: err => this.errorMessage = err
+              error: err => {
+                this.alertify.error(err);
+              }
             });
         }
       } else {
@@ -181,6 +197,7 @@ export class BookEditComponent implements OnInit {
   onSaveComplete(): void {
     // Reset the form to clear the flags
     this.bookForm.reset();
+    this.alertify.success('The book has been saved.');
     this.router.navigate(['/books']);
   }
 }

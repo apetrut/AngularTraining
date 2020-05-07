@@ -13,6 +13,7 @@ import { BookEditComponent } from './books/book-edit/book-edit.component';
 import { BookEditInfoComponent } from './books/book-edit/book-edit-info.component';
 import { BookEditTagsComponent } from './books/book-edit/book-edit-tags.component';
 import { BookDetailResolver } from './_resolvers/book-detail.resolver';
+import { BookEditGuard } from './_guards/book-edit.guard';
 
 export const bookRoutes: Routes = [
   { path: 'books',
@@ -29,6 +30,7 @@ export const bookRoutes: Routes = [
     path: 'books/:id/edit',
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
+    canDeactivate: [BookEditGuard],
     component: BookEditComponent,
     children: [
       {

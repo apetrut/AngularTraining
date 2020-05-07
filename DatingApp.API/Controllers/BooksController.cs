@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -14,14 +15,13 @@ namespace DatingApp.API.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        // Default constructor.
-        private readonly DataContext _context;
+        private readonly IBookRepository _repo;
 
         public IMapper _mapper { get; set; }
 
-        public BooksController(DataContext context, IMapper mapper)
+        public BooksController(IBookRepository repository, IMapper mapper)
         {
-            _context = context;
+            this._repo = repository;
             _mapper = mapper;
         }
 
@@ -29,7 +29,7 @@ namespace DatingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBooks()
         {
-            var books = await _context.Books.Include("Tags").ToListAsync();
+            var books = await _repo.GetBooks();
 
             var booksToReturn = _mapper.Map<IEnumerable<BookForListDTO>>(books);
 
@@ -40,7 +40,7 @@ namespace DatingApp.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBook(int id)
         {
-            var book = await _context.Books.FirstOrDefaultAsync(v => v.Id == id);
+            var book = await _repo.GetBook(id);
 
             var bookToReturn = _mapper.Map<BookForDetailedDTO>(book);
 
@@ -55,8 +55,18 @@ namespace DatingApp.API.Controllers
 
         // PUT api/books/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string Book)
+        public async Task<IActionResult> Put(int id, BookForUpdateDTO bookForUpdateDTO)
         {
+            var bookFromRepo = await _repo.GetBook(id);
+
+            _mapper.Map(bookForUpdateDTO, bookFromRepo);
+
+            if (await _repo.SaveAll())
+            {
+                return NoContent();
+            }
+
+            throw new Exception($"Updating book with id: {id} failed on save.");
         }
 
         // DELETE api/books/5
