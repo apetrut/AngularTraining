@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.API.Data;
+using DatingApp.API.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +16,14 @@ namespace DatingApp.API.Controllers
     {
         // Default constructor.
         private readonly DataContext _context;
-        
-        public BooksController(DataContext context) => _context = context;
+
+        public IMapper _mapper { get; set; }
+
+        public BooksController(DataContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
 
         // GET api/books
         [HttpGet]
@@ -22,7 +31,9 @@ namespace DatingApp.API.Controllers
         {
             var books = await _context.Books.Include("Tags").ToListAsync();
 
-            return Ok(books);
+            var booksToReturn = _mapper.Map<IEnumerable<BookForListDTO>>(books);
+
+            return Ok(booksToReturn);
         }
 
         // GET api/books/5
@@ -31,7 +42,9 @@ namespace DatingApp.API.Controllers
         {
             var book = await _context.Books.FirstOrDefaultAsync(v => v.Id == id);
 
-            return Ok(book);
+            var bookToReturn = _mapper.Map<BookForDetailedDTO>(book);
+
+            return Ok(bookToReturn);
         }
 
         // POST api/books

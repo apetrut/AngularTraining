@@ -37,6 +37,7 @@
   //     PublishedDate: '{{date(new Date(2014, 0, 1), new Date(), "YYYY-MM-ddThh:mm:ss Z")}}',
   //     Price: '{{integer(0, 100)}}',
   //     StarRating: '{{integer(0, 5)}}',
+  //     BookImageUrl: 'assets/images/xbox-controller.png',
   //     Tags: [
   //       '{{repeat(4)}}',
   //       {
