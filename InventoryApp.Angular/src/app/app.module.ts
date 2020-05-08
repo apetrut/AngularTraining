@@ -16,10 +16,11 @@ import { AuthService } from './_services/auth.service';
 import { RegisterComponent } from './register/register/register.component';
 import { ErrorInterceptorProvider } from './_interceptors/errorInterceptor';
 import { BsDropdownModule } from 'node_modules/ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'node_modules/ngx-bootstrap/datepicker';
 import { TabsModule } from 'node_modules/ngx-bootstrap/tabs';
 import { appRoutes } from './routes';
 
-export function tokenGetter(){
+export function tokenGetter() {
    return localStorage.getItem('token');
 }
 
@@ -37,6 +38,7 @@ export function tokenGetter(){
       ReactiveFormsModule,
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
+      BsDatepickerModule.forRoot(),
       ProductModule,
       BookModule,
       TabsModule.forRoot(),
