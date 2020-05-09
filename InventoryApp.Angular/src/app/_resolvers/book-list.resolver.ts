@@ -12,6 +12,9 @@ import { AlertifyService } from '../_services/alertify.service';
 
 export class BookListResolver implements Resolve<Book[]> {
 
+  pageNumber = 1;
+  pageSize = 5;
+
 constructor(private bookService: BookService,
             private router: Router,
             private alertify: AlertifyService) { }
@@ -19,7 +22,7 @@ constructor(private bookService: BookService,
   // this will be executed for every route that will use this resolver.
   // RouterStateSnapshot - a tree of activated route snapshots.
   resolve(route: ActivatedRouteSnapshot): Observable<Book[]> {
-    return this.bookService.getBooks().pipe(
+    return this.bookService.getBooks(this.pageNumber, this.pageSize).pipe(
       catchError(err => {
         this.alertify.error('Problem retrieving list of books.');
         this.router.navigate(['/welcome']);

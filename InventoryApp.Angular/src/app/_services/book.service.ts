@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Book } from '../models/book';
 import { environment } from 'src/environments/environment';
+import { PaginatedResult } from '../models/pagination';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({
@@ -19,15 +20,28 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.booksUrl)
+  getBooks(page?, itemsPerPage?): Observable<PaginatedResult<Book[]>> {
+    const paginatedResult: PaginatedResult<Book[]> = new PaginatedResult<Book[]>();
+
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null)
+    {
+        params = params.append('pageNumber', page);
+        params = params.append('pageSize', itemsPerPage);
+    }
+
+    return this.http.get<Book[]>(this.booksUrl, {observe: 'response', params})
       .pipe(
-        tap(book => {
-          console.log(this.booksUrl);
-          // console.log(JSON.stringify(book));
-        }),
-        catchError(this.handleError)
-      );
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+              paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+              console.log('Book Service Total items: ' + paginatedResult.pagination.totalItems);
+          }
+          return paginatedResult;
+        })
+      )
   }
 
   getBook(id: number): Observable<Book> {

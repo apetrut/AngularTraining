@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PaginationModule } from 'node_modules/ngx-bootstrap/pagination';
 
 import { StarComponent } from './star.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    PaginationModule.forRoot()
   ],
   declarations: [
     StarComponent
@@ -14,7 +16,8 @@ import { StarComponent } from './star.component';
   exports: [
     StarComponent,
     CommonModule,
-    FormsModule
+    FormsModule,
+    PaginationModule
   ]
 })
 export class SharedModule { }

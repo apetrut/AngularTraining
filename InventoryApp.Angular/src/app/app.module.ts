@@ -18,6 +18,7 @@ import { ErrorInterceptorProvider } from './_interceptors/errorInterceptor';
 import { BsDropdownModule } from 'node_modules/ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'node_modules/ngx-bootstrap/datepicker';
 import { TabsModule } from 'node_modules/ngx-bootstrap/tabs';
+
 import { appRoutes } from './routes';
 
 export function tokenGetter() {

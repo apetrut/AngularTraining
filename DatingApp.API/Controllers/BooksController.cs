@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.DTOs;
+using DatingApp.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,11 +28,14 @@ namespace DatingApp.API.Controllers
 
         // GET api/books
         [HttpGet]
-        public async Task<IActionResult> GetBooks()
+        public async Task<IActionResult> GetBooks([FromQuery]BookParams bookParams)
         {
-            var books = await _repo.GetBooks();
+            var books = await _repo.GetBooks(bookParams);
 
             var booksToReturn = _mapper.Map<IEnumerable<BookForListDTO>>(books);
+
+            // pass the information in the header to the client.
+            Response.AddPagination(books.CurrentPage, books.PageSize, books.TotalCount, books.TotalPages);
 
             return Ok(booksToReturn);
         }
