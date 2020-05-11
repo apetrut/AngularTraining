@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.API.Helpers;
@@ -33,7 +34,34 @@ namespace DatingApp.API.Data
 
         public async Task<PagedList<Book>> GetBooks(BookParams bookParams)
         {
-            var books = _context.Books;
+            var books = _context.Books.OrderByDescending(book => book.PublishedDate).AsQueryable();
+
+            if (!string.IsNullOrEmpty(bookParams.Topic) && 
+                bookParams.Topic.ToLower() != "any" &&
+                bookParams.Topic.ToLower() != "null")
+            {
+                books = books.Where(b => b.Topic.ToLower() == bookParams.Topic.ToLower() || b.Topic.ToLower().Contains(bookParams.Topic.ToLower()));
+            }
+
+            if (bookParams.MinPrice != 1 ||
+                bookParams.MaxPrice != 999)
+                {
+                    books = books.Where(b => b.Price >= bookParams.MinPrice && b.Price <= bookParams.MaxPrice);
+                }
+
+            if (!string.IsNullOrEmpty(bookParams.OrderBy))
+            {
+                switch (bookParams.OrderBy.ToLower())
+                {
+                    case "publisheddate":
+                        books = books.OrderByDescending(b => b.PublishedDate);
+                        break;
+                    case "starrating":
+                        books = books.OrderByDescending(b => b.StarRating);
+                        break;
+                }
+            }
+
             return await PagedList<Book>.CreateAsync(books,
                                                      bookParams.PageNumber,
                                                      bookParams.PageSize);

@@ -4,19 +4,51 @@
     </div>
   
     <div class="card-body">
-      <!-- <div class="row">
-        <div class="col-md-2">Filter by:</div>
-        <div class="col-md-4">
-          <input type="text"
-                 [(ngModel)]="listFilter" />
-        </div>
-      </div> -->
-      <!-- <div class="row"
-           *ngIf="listFilter">
-        <div class="col-md-6">
-          <h4>Filtered by: {{listFilter}}</h4>
-        </div>
-      </div> -->
+      <div class="text-left mt-3">
+        <h2>Your matches - {{pagination.totalItems}} found</h2>
+      </div>
+      
+          <form class="form-inline" 
+                novalidate
+                (ngSubmit)="applyFilter()"
+                [formGroup]="filterForm">
+              <div class="form-group">
+                <label for="minPriceId">Price From</label>
+                <input type="number" class="form-control ml-1" style="width: 70px" 
+                       id="minPriceId" name="minPrice" formControlName="minPrice">
+              </div>
+            
+              <div class="form-group px-2">
+                <label for="maxPriceId">Price To</label>
+                <input type="number" class="form-control ml-1" style="width: 70px" 
+                       id="maxPriceId" name="maxPrice" formControlName="maxPrice">
+              </div>
+            
+              <div class="form-group px-2">
+                <label for="topicId">Topic: </label>
+                <select class="form-control ml-1" style="width: 130px" 
+                        id="topicId" name="topic" formControlName="topic">
+                  <option *ngFor="let topic of topicList" [value]="topic.value">
+                    {{topic.display}}
+                  </option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filters</button>
+              <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Reset Filter</button>
+
+              <div class="col">
+                <div class="btn-group float-right">
+                  <button type="button" name="publishedDate" formControlName="orderBy" 
+                          class="btn btn-primary" btnRadio="publishedDate"
+                          (click)="sort('publishedDate')">Published Date</button>
+                  <button type="button" name="starRating" formControlName="orderBy" 
+                          class="btn btn-primary" btnRadio="starRating"
+                          (click)="sort('starRating')">Star Rating</button>
+                </div>
+              </div>
+            
+          </form>
+            <br>
   
       <div class="container mt-5">
         <div class="row">

@@ -29,14 +29,13 @@ export class BookEditComponent implements OnInit {
 
   @HostListener('window:beforeunload', ['event'])
   unloadNotification($event: any) {
-    if (this.bookForm.dirty)
-    {
+    if (this.bookForm.dirty) {
         $event.returnValue = true;
     }
   }
 
   get tags(): FormArray {
-    return this.bookForm.get('tags') as FormArray;
+    return this.bookForm.controls.tags as FormArray;
   }
 
   constructor(private fb: FormBuilder,
@@ -74,7 +73,7 @@ export class BookEditComponent implements OnInit {
                          Validators.maxLength(50)]],
       ISBN: ['', Validators.required],
       starRating: ['', NumberValidators.range(1, 5)],
-      tags: this.fb.array([]), 
+      tags: this.fb.array([]),
       description: ''
     });
 

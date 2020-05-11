@@ -30,6 +30,20 @@ namespace DatingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBooks([FromQuery]BookParams bookParams)
         {
+            var bookFromRepo = await _repo.GetBook(bookParams.BookId);
+
+            if (bookFromRepo != null)
+            {
+                // set the book id.
+                bookParams.BookId = bookFromRepo.Id;
+
+                if (string.IsNullOrEmpty(bookParams.Topic))
+                {
+                    // set the book topic.
+                    bookParams.Topic = bookFromRepo.Topic;
+                }
+            }
+
             var books = await _repo.GetBooks(bookParams);
 
             var booksToReturn = _mapper.Map<IEnumerable<BookForListDTO>>(books);
