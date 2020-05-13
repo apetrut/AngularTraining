@@ -5,7 +5,7 @@ export interface Product {
   id: number;
   productName: string;
   productCode: string;
-  tags?: string[];
+  tags?: any[];
   releaseDate: string;
   price: number;
   description: string;

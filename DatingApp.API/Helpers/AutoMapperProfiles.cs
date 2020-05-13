@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DatingApp.API.DTOs;
@@ -20,6 +21,25 @@ namespace DatingApp.API.Helpers
 
             CreateMap<UserForRegisterDTO, User>();
             CreateMap<User, UserForRegisterDTO>();
+
+            CreateMap<Product, ProductForDetailDTO>()
+                .AfterMap( (productDb, productDto) => {
+                    
+                    if (productDb.ProductTags != null && productDb.ProductTags.Any())
+                    {
+                        productDto.Tags = new List<TagDTO>();
+                        foreach(var productTag in productDb.ProductTags)
+                        {
+                            productDto.Tags.Add(new TagDTO(){
+                                Id = productTag.Tag.Id,
+                                Name = productTag.Tag.Name
+                            } );
+                        }
+                    }
+                });
+
+            CreateMap<ProductForUpdateDTO, Product>();
+            CreateMap<TagDTO, Tag>();
         }
     }
 }

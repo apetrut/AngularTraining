@@ -14,7 +14,7 @@ namespace DatingApp.API.Models
 
         public string ISBN { get; set; }
 
-        public List<Tag> Tags { get; set; }
+        public ICollection<BookTag> BookTags { get; set; }
 
         [DisplayFormat(DataFormatString="{0:d}")]
         public DateTime PublishedDate { get; set; }

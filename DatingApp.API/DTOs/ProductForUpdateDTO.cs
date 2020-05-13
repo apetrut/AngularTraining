@@ -1,17 +1,14 @@
-using System;
 using System.Collections.Generic;
 
-namespace DatingApp.API.Models
+namespace DatingApp.API.DTOs
 {
-    public class Product
+    public class ProductForUpdateDTO
     {
         public int Id { get; set; }
-
+        
         public string ProductName { get; set; }
 
         public string ProductCode { get; set; }
-
-        public DateTime ReleaseDate { get; set; }
 
         public float Price { get; set; }
 
@@ -19,8 +16,6 @@ namespace DatingApp.API.Models
 
         public string ImageUrl { get; set; }
 
-        public ICollection<ProductTag> ProductTags { get; set; }
-
-        public ICollection<Photo> Photos { get; set; }
+        public ICollection<TagDTO> Tags { get; set; }
     }
 }

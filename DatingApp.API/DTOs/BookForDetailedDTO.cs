@@ -15,7 +15,7 @@ namespace DatingApp.API.DTOs
 
         public string ISBN { get; set; }
 
-        public List<Tag> Tags { get; set; }
+        public List<TagDTO> Tags { get; set; }
 
         [DisplayFormat(DataFormatString="{0:d}")]
         public DateTime PublishedDate { get; set; }

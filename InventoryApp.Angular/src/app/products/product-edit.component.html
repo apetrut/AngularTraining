@@ -59,16 +59,16 @@
 
       <div formArrayName="tags">
         <div class="form-group row mb-2"
-             *ngFor="let tag of tags.controls; let i=index">
+             *ngFor="let tag of tags.controls; let i = index">
           <label class="col-md-2 col-form-label"
                  [attr.for]="i">Tag</label>
 
           <div class="col-md-8">
             <input class="form-control"
-                   [id]="i"
+                   [id]="currentIds[i]"
                    type="text"
                    placeholder="Tag"
-                   [formControlName]="i" />
+                   [formControlName]="i"/>
           </div>
           <button class="col-md-1 btn btn-outline-warning btn-sm"
                   type="button"
@@ -88,7 +88,7 @@
         </div>
       </div>
       
-      <div class="form-group row mb-2">
+      <!-- <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label"
                for="descriptionId">Description</label>
 
@@ -103,7 +103,7 @@
             {{ displayMessage.description}}
           </span>
         </div>
-      </div>
+      </div> -->
 
       <div class="form-group row mb-2">
         <div class="offset-md-2 col-md-4">

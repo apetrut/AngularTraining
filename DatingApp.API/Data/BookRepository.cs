@@ -26,6 +26,11 @@ namespace DatingApp.API.Data
             _context.Remove(entity);
         }
 
+        public Task<bool> Exists<T>(T entity) where T : class
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<Book> GetBook(int id)
         {
             var book = await _context.Books.Include("Tags").FirstOrDefaultAsync(p => p.Id == id);

@@ -39,7 +39,9 @@
         </div>
         <div class="row">
           <div class="col-md-3">Tags:</div>
-          <div class="col-md-6">{{product.tags}}</div>
+          <div class="col-md-6" *ngFor="let tag of product.tags">
+            <label>{{tag.name}}</label>
+          </div>
         </div>
       </div>
 

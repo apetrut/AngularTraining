@@ -13,41 +13,37 @@ namespace DatingApp.API.Data
         // Seed method.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book>().HasData(
-                new Book() {
-                    Id = 1,
-                    Author = "Author Test 1",
-                    BookTitle = "Book Title test 1",
-                    Description = "Description 1",
-                    BookImageUrl = "",
-                    ISBN = "111111111111111111111",
-                    PublishedDate = new System.DateTime(2019, 8, 21),
-                    Price = 49.99f,
-                    StarRating = 4.7f,
-                    Topic = "Science"
-                },
-                new Book() {
-                    Id = 2,
-                    Author = "Author Test 2",
-                    BookTitle = "Book Title test 2",
-                    Description = "Description 2",
-                    BookImageUrl = "",
-                    ISBN = "2222222222222222222222",
-                    PublishedDate = new System.DateTime(1956, 8, 21),
-                    Price = 17.99f,
-                    StarRating = 4.7f,
-                    Topic = "Science"
-                });
+            // ---- many-to-many for Books and Tags.
+            modelBuilder.Entity<BookTag>()
+                .HasKey(t => new { t.BookId, t.TagId });
 
-            modelBuilder.Entity<Product>().HasData(new Product(){
-                Id = 1,
-                Price = 29.79f,
-                ProductCode = "LFG TYP",
-                ProductName = "Product 1",
-                ReleaseDate = new System.DateTime(2020, 3, 21),
-                ImageUrl = "",
-                StarRating = "4"
-            });
+            modelBuilder.Entity<BookTag>()
+                .HasOne(b => b.Book)
+                .WithMany(bt => bt.BookTags)
+                .HasForeignKey(b => b.BookId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<BookTag>()
+                .HasOne(t => t.Tag)
+                .WithMany(tt => tt.BookTags)
+                .HasForeignKey(t => t.TagId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            // ---- many-to-many for Prodcts and Tags.
+            modelBuilder.Entity<ProductTag>()
+                .HasKey(t => new { t.ProductId, t.TagId });
+
+            modelBuilder.Entity<ProductTag>()
+                .HasOne(b => b.Product)
+                .WithMany(bt => bt.ProductTags)
+                .HasForeignKey(b => b.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<ProductTag>()
+                .HasOne(t => t.Tag)
+                .WithMany(tt => tt.ProductTags)
+                .HasForeignKey(t => t.TagId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
 
         public DbSet<Book> Books { get; set; }
@@ -57,5 +53,7 @@ namespace DatingApp.API.Data
         public DbSet<User> Users { get; set; }
 
         public DbSet<Photo> Photos { get; set; }
+
+        // public DbSet<Tag> Tags { get; set; }
     }
 }

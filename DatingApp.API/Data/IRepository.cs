@@ -10,5 +10,7 @@ namespace DatingApp.API.Data
          void Delete<T>(T entity) where T: class;
 
          Task<bool> SaveAll();
+
+         Task<bool> Exists<T>(T entity) where T: class;
     }
 }

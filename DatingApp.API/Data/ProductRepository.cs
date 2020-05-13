@@ -24,15 +24,22 @@ namespace DatingApp.API.Data
             _context.Remove(entity);
         }
 
+        public Task<bool> Exists<T>(T entity) where T : class
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<Product> GetProduct(int id)
         {
-            var product = await _context.Products.Include("Photos").FirstOrDefaultAsync(p => p.Id == id);
+            var product = await _context.Products.Include("Photos").Include("ProductTags.Tag").FirstOrDefaultAsync(p => p.Id == id);
             return product;
         }
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            var products = await _context.Products.Include("Photos").ToListAsync();
+            var products = await _context.Products.Include("Photos")
+                                                  .Include("ProductTags")
+                                                  .ToListAsync();
             return products;
         }
 
