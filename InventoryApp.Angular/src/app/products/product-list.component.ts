@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Product } from '../models/product';
 import { ProductService } from '../_services/product.service';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   templateUrl: './product-list.component.html',
@@ -27,7 +28,8 @@ export class ProductListComponent implements OnInit {
   filteredProducts: Product[] = [];
   products: Product[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+              private alertifySerice: AlertifyService) { }
 
   performFilter(filterBy: string): Product[] {
     filterBy = filterBy.toLocaleLowerCase();
@@ -45,7 +47,7 @@ export class ProductListComponent implements OnInit {
         this.products = products;
         this.filteredProducts = this.products;
       },
-      error: err => this.errorMessage = err
+      error: err => this.alertifySerice.error(err)
     });
   }
 }

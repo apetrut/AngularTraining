@@ -11,8 +11,6 @@ import { ProductService } from '../_services/product.service';
 import { NumberValidators } from '../shared/number.validator';
 import { GenericValidator } from '../shared/generic-validator';
 
-import { parse, stringify } from 'node_modules/flatted/esm';
-import { Tag } from '../models/tag';
 import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
@@ -25,8 +23,6 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
   errorMessage: string;
   productForm: FormGroup;
   product: Product;
-  currentIds: any[] = [];
-  initialTags: Tag[] = [];
   private sub: Subscription;
 
   // Use with the generic validation message class
@@ -107,13 +103,12 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   addTag(): void {
     this.tags.push(new FormControl());
-    this.currentIds.push(0);
   }
 
   deleteTag(index: number): void {
     this.tags.removeAt(index);
     this.tags.markAsDirty();
-    this.initialTags.splice(index, 1);
+    this.product.tags.splice(index, 1);
   }
 
   getProduct(id: number): void {
@@ -129,12 +124,6 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.productForm.reset();
     }
     this.product = product;
-
-    // save the current tag collection for later use.
-    this.initialTags = this.product.tags;
-
-    console.log('Initial Tags from Display Product: ' + JSON.stringify(this.initialTags));
-    console.log('Display Product: ' + JSON.stringify(product));
 
     if (this.product.id === 0) {
       this.pageTitle = 'Add Product';
@@ -157,7 +146,6 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
     const control = this.productForm.get('tags') as FormArray;
     this.product.tags?.forEach(tag => {
-      this.currentIds.push(tag.id);
       control.push(new FormControl({ value: tag.name, disabled: true }));
     });
   }
@@ -184,22 +172,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
         // create a new Product object, overwriting any values from the form.
         const p = { ...this.product, ...this.productForm.value };
 
-        const newTags = p.tags;
-        console.log('New Tags: ' + JSON.stringify(newTags));
-        // const tagsControl = this.productForm.get('tags') as FormArray;
-
-        // assign the old collection of tags.
-        p.tags = this.initialTags;
-        console.log('Save 1: ' + JSON.stringify(p.tags) + ' ids: ' + this.currentIds);
-
-        newTags.forEach(newTag => {
-            // if (newTag.id === 0)
-            // {
-              console.log('Add new tag:' + JSON.stringify(newTag));
-              p.tags.push({id: 0, name: newTag});
-        });
-
-        console.log('Save 2: ' + JSON.stringify(p.tags) + ' ids: ' + this.currentIds);
+        this.updateTagCollection(p);
 
         if (p.id === 0) {
           this.productService.createProduct(p)
@@ -209,10 +182,10 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
             });
         } else {
           this.productService.updateProduct(p)
-            .subscribe({
-              next: () => this.onSaveComplete(),
-              error: err => { this.alertify.error('Update failed!'); }
-            });
+            .subscribe(
+              () => this.onSaveComplete(),
+              err => { this.alertify.error('Update failed!'); },
+              () => this.alertify.success('Save successful.'));
         }
       } else {
         this.onSaveComplete();
@@ -220,6 +193,21 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.errorMessage = 'Please correct the validation errors.';
     }
+  }
+
+  // setup the tag collection.
+  updateTagCollection(p: any) {
+    const newTags = this.productForm.value.tags;
+    p.tags = [];
+
+        // assign the updated collection of tags.
+    p.tags = this.product.tags == null ? [] : this.product.tags;
+
+        // add the new tags, if any.
+    newTags?.forEach(newTag => {
+              console.log('Add new tag:' + JSON.stringify(newTag));
+              p.tags.push({id: 0, name: newTag});
+    });
   }
 
   onSaveComplete(): void {
