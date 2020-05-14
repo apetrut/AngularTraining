@@ -59,10 +59,10 @@ namespace DatingApp.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
+            // {
+            //     app.UseDeveloperExceptionPage();
+            // }
+            // else
             {
                 app.UseExceptionHandler(builder => {
                     builder.Run(async context => {

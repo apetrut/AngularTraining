@@ -13,6 +13,7 @@ import { GenericValidator } from '../shared/generic-validator';
 
 import { parse, stringify } from 'node_modules/flatted/esm';
 import { Tag } from '../models/tag';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   templateUrl: './product-edit.component.html'
@@ -40,6 +41,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
+              private alertify: AlertifyService,
               private productService: ProductService) {
 
     // Defines all of the validation messages for the form.
@@ -203,13 +205,13 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
           this.productService.createProduct(p)
             .subscribe({
               next: () => this.onSaveComplete(),
-              error: err => this.errorMessage = err
+              error: err => this.alertify.error(err)
             });
         } else {
           this.productService.updateProduct(p)
             .subscribe({
               next: () => this.onSaveComplete(),
-              error: err => this.errorMessage = err
+              error: err => { this.alertify.error('Update failed!'); }
             });
         }
       } else {

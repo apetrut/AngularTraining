@@ -1,3 +1,5 @@
+using System;
+
 namespace DatingApp.API.Models
 {
     public class ProductTag

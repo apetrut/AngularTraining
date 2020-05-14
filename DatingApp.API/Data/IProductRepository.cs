@@ -5,7 +5,7 @@ using DatingApp.API.Models;
 namespace DatingApp.API.Data
 {
     // This is the repository for the Product entity.
-    public interface IProductRepository : IRepository
+    public interface IProductRepository : IRepository<Product>
     {
          Task<IEnumerable<Product>> GetProducts();
 

@@ -54,6 +54,6 @@ namespace DatingApp.API.Data
 
         public DbSet<Photo> Photos { get; set; }
 
-        // public DbSet<Tag> Tags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatingApp.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Data
 {
@@ -17,24 +18,47 @@ namespace DatingApp.API.Data
             _dataContext.Add(entity);
         }
 
-        public void Delete<T>(T entity) where T : class
+        public void Add(Tag entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Exists()
+        public void Delete(Tag entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Exists<T>(T entity) where T : class
+        public async Task<bool> ExistsAsync(Tag entity)
         {
-            throw new System.NotImplementedException();
+            return await _dataContext.Tags.AnyAsync(t => t.Name == entity.Name);
         }
 
-        public Task<Tag> GetTag(int id)
+         public async Task<int> ExistsAsync(string name)
         {
-            throw new System.NotImplementedException();
+            Tag tagFromRepo = await _dataContext.Tags.FirstOrDefaultAsync(t => t.Name == name);
+            if (tagFromRepo != null)
+            {
+                return tagFromRepo.Id;
+            }
+
+            return -1;
+        }
+
+        public async Task<int> FindId(string name)
+        {
+            Tag tagFromRepo = await _dataContext.Tags.FirstOrDefaultAsync(t => t.Name == name);
+            if (tagFromRepo != null)
+            {
+                return tagFromRepo.Id;
+            }
+
+            return -1;
+        }
+
+        public async Task<Tag> GetTag(string name)
+        {
+             var tag = await _dataContext.Tags.Include("BookTags").Include("ProductTags").FirstOrDefaultAsync(p => p.Name == name);
+            return tag;
         }
 
         public Task<IEnumerable<Tag>> GetTags()
@@ -46,5 +70,7 @@ namespace DatingApp.API.Data
         {
             return await _dataContext.SaveChangesAsync() > 0;
         }
+
+       
     }
 }

@@ -7,6 +7,7 @@ using DatingApp.API.Data;
 using DatingApp.API.DTOs;
 using DatingApp.API.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -53,12 +54,17 @@ namespace DatingApp.API.Controllers
 
         // POST api/Products
         [HttpPost]
-        public void Post([FromBody]string Product)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public void Post(Product product)
         {
+            // return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
         // PUT api/Products/5
         [HttpPut("{id}")]
+        // [ProducesResponseType(StatusCodes.Status304NotModified)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesErrorResponseType(typeof(Exception))]
         public async Task<IActionResult> Put(int id, ProductForUpdateDTO productForUpdateDTO)
         {
             var productFromRepo = await _repo.GetProduct(id);
@@ -66,22 +72,35 @@ namespace DatingApp.API.Controllers
             _mapper.Map(productForUpdateDTO, productFromRepo);
 
             // save the tags first.
-            productForUpdateDTO.Tags.Where(t => t.Id == 0).ToList().ForEach(tag =>
+            productForUpdateDTO.Tags.Where(t => t.Id == 0).ToList().ForEach(async tag =>
             {
                // Add the new tags to the product. 
                // Behind the scenes EF will create new Tags in the DB table and associate their new IDs with the Product.
-               productFromRepo.ProductTags.Add(new ProductTag()
-               { 
-                   Tag = _mapper.Map<Tag>(tag)
-               });
+
+               // don't add a new tag if it already exists in the current list.
+               if (!productFromRepo.ProductTags.Any(p => p.Tag.Name == tag.Name))
+               {
+                    Tag tagFromDb = await _tagRepo.GetTag(tag.Name);
+                    ProductTag newProductTag = new ProductTag();
+
+                    if (tagFromDb == null)
+                    {
+                            newProductTag.Tag = _mapper.Map<Tag>(tag);
+                    }
+                    else
+                    {
+                        newProductTag.Tag = tagFromDb;
+                    }
+                    productFromRepo.ProductTags.Add(newProductTag);
+               }
             });
 
-            if (await _repo.SaveAll())
-            {
-                return NoContent();
-            }
+                if (await _repo.SaveAll())
+                {
+                    return NoContent();
+                }
 
-            throw new Exception($"Updating product with id: {id} failed on save.");
+                throw new Exception($"Updating product with id: {id} failed on save.");
         }
 
         // DELETE api/Products/5

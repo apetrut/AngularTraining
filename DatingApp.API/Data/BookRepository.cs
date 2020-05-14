@@ -16,17 +16,27 @@ namespace DatingApp.API.Data
             this._context = context;
         }
         
-        public void Add<T>(T entity) where T : class
+        public void Add(Book entity)
         {
             _context.Add(entity);
         }
 
-        public void Delete<T>(T entity) where T : class
+        public void Delete(Book entity)
         {
             _context.Remove(entity);
         }
 
-        public Task<bool> Exists<T>(T entity) where T : class
+        public Task<bool> Exists(Book entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> ExistsAsync(Book entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<int> FindId(string name)
         {
             throw new System.NotImplementedException();
         }
