@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DatingApp.API.Data
@@ -5,14 +6,16 @@ namespace DatingApp.API.Data
     // General repository with common actions for all repositories.
     public interface IRepository<T> where T: class
     {
-         void Add(T entity);
+         T Add(T entity);
 
-         void Delete(T entity);
+         int Delete(T entity);
 
-         Task<bool> SaveAll();
+         T Update(T entity);
 
-         Task<bool> ExistsAsync(T entity);
+         ICollection<T> GetAll();
 
-         Task<int> FindId(string name);
+         T GetById(int id);
+
+         T GetByName(string name);
     }
 }

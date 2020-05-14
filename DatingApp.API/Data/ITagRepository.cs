@@ -4,10 +4,8 @@ using DatingApp.API.Models;
 
 namespace DatingApp.API.Data
 {
-    public interface ITagRepository : IRepository<Tag>
+    public interface ITagRepository : IRepositoryAsync<Tag>
     {
-         Task<IEnumerable<Tag>> GetTags();
-
-         Task<Tag> GetTag(string name);
+         // Task<Tag> GetTag(string name);
     }
 }

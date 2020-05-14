@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DatingApp.API.Data
 {
@@ -15,38 +16,14 @@ namespace DatingApp.API.Data
             this._context = context;
         }
         
-        public void Add(Product entity)
+        public async ValueTask<EntityEntry> AddAsync(Product entity) => await _context.AddAsync(entity);
+
+        public Task<int> DeleteAsync(Product entity)
         {
-             _context.Add(entity);
+            throw new NotImplementedException();
         }
 
-        public void Delete(Product entity)
-        {
-             _context.Remove(entity);
-        }
-
-        public Task<bool> Exists(Product entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<bool> ExistsAsync(Product entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<int> FindId(string name)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<Product> GetProduct(int id)
-        {
-            var product = await _context.Products.Include("Photos").Include("ProductTags.Tag").FirstOrDefaultAsync(p => p.Id == id);
-            return product;
-        }
-
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<ICollection<Product>> GetAllAsync()
         {
             var products = await _context.Products.Include("Photos")
                                                   .Include("ProductTags")
@@ -54,9 +31,35 @@ namespace DatingApp.API.Data
             return products;
         }
 
+        public Product GetById(int id)
+        {
+           throw new NotImplementedException();
+        }
+
+        public async Task<Product> GetByIdAsync(int id)
+        {
+             var product = await _context.Products.Include("Photos").Include("ProductTags.Tag").FirstOrDefaultAsync(p => p.Id == id);
+            return product;
+        }
+
+        public Product GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Product> GetByNameAsync(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public Product Update(Product entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

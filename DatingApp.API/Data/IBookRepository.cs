@@ -4,10 +4,8 @@ using DatingApp.API.Models;
 
 namespace DatingApp.API.Data
 {
-    public interface IBookRepository : IRepository<Book>
+    public interface IBookRepository : IRepositoryAsync<Book>
     {
-         Task<PagedList<Book>> GetBooks(BookParams bookParams);
-
-         Task<Book> GetBook(int id);
+         Task<PagedList<Book>> GetBooksAsync(BookParams bookParams);
     }
 }

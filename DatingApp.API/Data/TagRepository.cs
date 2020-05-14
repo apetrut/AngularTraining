@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DatingApp.API.Data
 {
@@ -13,35 +14,14 @@ namespace DatingApp.API.Data
         {
             _dataContext = dataContext;
         }
-        public void Add<T>(T entity) where T : class
-        {
-            _dataContext.Add(entity);
-        }
-
-        public void Add(Tag entity)
+        public Task<Tag> AddAsync(Tag entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Delete(Tag entity)
+        public Task<int> DeleteAsync(Tag entity)
         {
             throw new System.NotImplementedException();
-        }
-
-        public async Task<bool> ExistsAsync(Tag entity)
-        {
-            return await _dataContext.Tags.AnyAsync(t => t.Name == entity.Name);
-        }
-
-         public async Task<int> ExistsAsync(string name)
-        {
-            Tag tagFromRepo = await _dataContext.Tags.FirstOrDefaultAsync(t => t.Name == name);
-            if (tagFromRepo != null)
-            {
-                return tagFromRepo.Id;
-            }
-
-            return -1;
         }
 
         public async Task<int> FindId(string name)
@@ -55,9 +35,19 @@ namespace DatingApp.API.Data
             return -1;
         }
 
-        public async Task<Tag> GetTag(string name)
+        public Task<ICollection<Tag>> GetAllAsync()
         {
-             var tag = await _dataContext.Tags.Include("BookTags").Include("ProductTags").FirstOrDefaultAsync(p => p.Name == name);
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Tag> GetByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<Tag> GetByNameAsync(string name)
+        {
+            var tag = await _dataContext.Tags.Include("BookTags").Include("ProductTags").FirstOrDefaultAsync(p => p.Name == name);
             return tag;
         }
 
@@ -71,6 +61,9 @@ namespace DatingApp.API.Data
             return await _dataContext.SaveChangesAsync() > 0;
         }
 
-       
+        ValueTask<EntityEntry> IRepositoryAsync<Tag>.AddAsync(Tag entity)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

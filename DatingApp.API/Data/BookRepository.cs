@@ -5,6 +5,7 @@ using AutoMapper;
 using DatingApp.API.Helpers;
 using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DatingApp.API.Data
 {
@@ -16,17 +17,12 @@ namespace DatingApp.API.Data
             this._context = context;
         }
         
-        public void Add(Book entity)
+        public ValueTask<EntityEntry> AddAsync(Book entity)
         {
-            _context.Add(entity);
+            throw new System.NotImplementedException();
         }
 
-        public void Delete(Book entity)
-        {
-            _context.Remove(entity);
-        }
-
-        public Task<bool> Exists(Book entity)
+        public Task<int> DeleteAsync(Book entity)
         {
             throw new System.NotImplementedException();
         }
@@ -36,18 +32,12 @@ namespace DatingApp.API.Data
             throw new System.NotImplementedException();
         }
 
-        public Task<int> FindId(string name)
+        public Task<ICollection<Book>> GetAllAsync()
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<Book> GetBook(int id)
-        {
-            var book = await _context.Books.Include("Tags").FirstOrDefaultAsync(p => p.Id == id);
-            return book;
-        }
-
-        public async Task<PagedList<Book>> GetBooks(BookParams bookParams)
+        public async Task<PagedList<Book>> GetBooksAsync(BookParams bookParams)
         {
             var books = _context.Books.OrderByDescending(book => book.PublishedDate).AsQueryable();
 
@@ -80,6 +70,17 @@ namespace DatingApp.API.Data
             return await PagedList<Book>.CreateAsync(books,
                                                      bookParams.PageNumber,
                                                      bookParams.PageSize);
+        }
+
+        public async Task<Book> GetByIdAsync(int id)
+        {
+            var book = await _context.Books.Include("BookTags").FirstOrDefaultAsync(p => p.Id == id);
+            return book;
+        }
+
+        public Task<Book> GetByNameAsync(string name)
+        {
+            throw new System.NotImplementedException();
         }
 
         public async Task<bool> SaveAll()

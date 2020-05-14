@@ -35,7 +35,7 @@ namespace DatingApp.API.Controllers
         [HttpGet] 
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _repo.GetProducts();
+            var products = await _repo.GetAllAsync();
 
             var productsToReturn = _mapper.Map<IEnumerable<ProductForListDTO>>(products);
 
@@ -46,7 +46,7 @@ namespace DatingApp.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
-            var product = await _repo.GetProduct(id);
+            var product = await _repo.GetByIdAsync(id);
 
             var productToReturn = _mapper.Map<ProductForDetailDTO>(product);
             return Ok(productToReturn);
@@ -95,7 +95,7 @@ namespace DatingApp.API.Controllers
                 // don't add a new tag if it already exists in the current list.
                 if (!productFromRepo.ProductTags.Any(p => p.Tag.Name == tag.Name))
                 {
-                    Tag tagFromDb = _tagRepo.GetTag(tag.Name).Result;
+                    Tag tagFromDb = _tagRepo.GetByNameAsync(tag.Name).Result;
                     ProductTag newProductTag = new ProductTag();
 
                     if (tagFromDb == null)
@@ -118,7 +118,7 @@ namespace DatingApp.API.Controllers
         // Find the missing tags and remove them from the tag collection.
         private async Task<Product> FindMissingTags(int id, ProductForUpdateDTO productForUpdateDTO)
         {
-            var productFromRepo = await _repo.GetProduct(id);
+            var productFromRepo = await _repo.GetByIdAsync(id);
 
             // find missing rows.
             List<ProductTag> missingRows = new List<ProductTag>();
