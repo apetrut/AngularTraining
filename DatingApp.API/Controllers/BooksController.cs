@@ -79,7 +79,7 @@ namespace DatingApp.API.Controllers
 
             _mapper.Map(bookForUpdateDTO, bookFromRepo);
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
             {
                 return NoContent();
             }

@@ -18,7 +18,7 @@ namespace DatingApp.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _repo;
+        private readonly IProductRepository _productRepo;
 
         private readonly ITagRepository _tagRepo;
 
@@ -26,7 +26,7 @@ namespace DatingApp.API.Controllers
 
         public ProductsController(IProductRepository repository, ITagRepository tagRepository, IMapper mapper)
         {
-            this._repo = repository;
+            this._productRepo = repository;
             this._mapper = mapper;
             this._tagRepo = tagRepository;
         }
@@ -35,7 +35,7 @@ namespace DatingApp.API.Controllers
         [HttpGet] 
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _repo.GetAllAsync();
+            var products = await _productRepo.GetAllAsync();
 
             var productsToReturn = _mapper.Map<IEnumerable<ProductForListDTO>>(products);
 
@@ -46,7 +46,7 @@ namespace DatingApp.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
-            var product = await _repo.GetByIdAsync(id);
+            var product = await _productRepo.GetByIdAsync(id);
 
             var productToReturn = _mapper.Map<ProductForDetailDTO>(product);
             return Ok(productToReturn);
@@ -76,7 +76,7 @@ namespace DatingApp.API.Controllers
             // update the rest of the properties.
             _mapper.Map(productForUpdateDTO, productFromRepo);
 
-            if (await _repo.SaveAll())
+            if (await _productRepo.SaveAllAsync())
             {
                 return NoContent();
             }
@@ -118,7 +118,7 @@ namespace DatingApp.API.Controllers
         // Find the missing tags and remove them from the tag collection.
         private async Task<Product> FindMissingTags(int id, ProductForUpdateDTO productForUpdateDTO)
         {
-            var productFromRepo = await _repo.GetByIdAsync(id);
+            var productFromRepo = await _productRepo.GetByIdAsync(id);
 
             // find missing rows.
             List<ProductTag> missingRows = new List<ProductTag>();

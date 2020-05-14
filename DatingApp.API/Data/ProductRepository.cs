@@ -15,6 +15,8 @@ namespace DatingApp.API.Data
         {
             this._context = context;
         }
+
+        #region Async Methods
         
         public async ValueTask<EntityEntry> AddAsync(Product entity) => await _context.AddAsync(entity);
 
@@ -31,20 +33,10 @@ namespace DatingApp.API.Data
             return products;
         }
 
-        public Product GetById(int id)
-        {
-           throw new NotImplementedException();
-        }
-
         public async Task<Product> GetByIdAsync(int id)
         {
              var product = await _context.Products.Include("Photos").Include("ProductTags.Tag").FirstOrDefaultAsync(p => p.Id == id);
             return product;
-        }
-
-        public Product GetByName(string name)
-        {
-            throw new NotImplementedException();
         }
 
         public Task<Product> GetByNameAsync(string name)
@@ -52,14 +44,11 @@ namespace DatingApp.API.Data
             throw new NotImplementedException();
         }
 
-        public async Task<bool> SaveAll()
+        public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public Product Update(Product entity)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }

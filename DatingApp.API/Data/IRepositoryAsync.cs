@@ -10,7 +10,7 @@ namespace DatingApp.API.Data
 
          Task<int> DeleteAsync(T entity);
 
-         Task<bool> SaveAll();
+         Task<bool> SaveAllAsync();
 
          Task<ICollection<T>> GetAllAsync();
 

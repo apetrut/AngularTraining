@@ -83,7 +83,7 @@ namespace DatingApp.API.Data
             throw new System.NotImplementedException();
         }
 
-        public async Task<bool> SaveAll()
+        public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
         }
