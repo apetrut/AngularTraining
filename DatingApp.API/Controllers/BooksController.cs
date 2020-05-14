@@ -30,7 +30,7 @@ namespace DatingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBooks([FromQuery]BookParams bookParams)
         {
-            var bookFromRepo = await _repo.GetByIdAsync(bookParams.BookId);
+            var bookFromRepo = await _repo.GetAsync(bookParams.BookId);
 
             if (bookFromRepo != null)
             {
@@ -44,7 +44,7 @@ namespace DatingApp.API.Controllers
                 }
             }
 
-            var books = await _repo.GetBooksAsync(bookParams);
+            var books = await _repo.GetBooksWithPaginationAsync(bookParams);
 
             var booksToReturn = _mapper.Map<IEnumerable<BookForListDTO>>(books);
 
@@ -58,7 +58,7 @@ namespace DatingApp.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBook(int id)
         {
-            var book = await _repo.GetByIdAsync(id);
+            var book = await _repo.GetAsync(id);
 
             var bookToReturn = _mapper.Map<BookForDetailedDTO>(book);
 
@@ -75,11 +75,11 @@ namespace DatingApp.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, BookForUpdateDTO bookForUpdateDTO)
         {
-            var bookFromRepo = await _repo.GetByIdAsync(id);
+            var bookFromRepo = await _repo.GetAsync(id);
 
             _mapper.Map(bookForUpdateDTO, bookFromRepo);
 
-            if (await _repo.SaveAllAsync())
+            if (await _repo.SaveAsync() > 0)
             {
                 return NoContent();
             }

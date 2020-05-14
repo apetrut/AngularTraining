@@ -30,10 +30,13 @@ namespace DatingApp.API.Helpers
                         productDto.Tags = new List<TagDTO>();
                         foreach(var productTag in productDb.ProductTags)
                         {
-                            productDto.Tags.Add(new TagDTO(){
-                                Id = productTag.Tag.Id,
-                                Name = productTag.Tag.Name
-                            } );
+                            if (productTag.Tag != null)
+                            {
+                                productDto.Tags.Add(new TagDTO(){
+                                    Id = productTag.Tag.Id,
+                                    Name = productTag.Tag.Name
+                                } );
+                            }
                         }
                     }
                 });

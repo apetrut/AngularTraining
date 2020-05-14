@@ -5,39 +5,14 @@ using AutoMapper;
 using DatingApp.API.Helpers;
 using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DatingApp.API.Data
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository : GenericRepository<Book>, IBookRepository
     {
-        private readonly DataContext _context;
-        public BookRepository(DataContext context)
-        {
-            this._context = context;
-        }
+        public BookRepository(DataContext context) : base(context) {}
         
-        public ValueTask<EntityEntry> AddAsync(Book entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<int> DeleteAsync(Book entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<bool> ExistsAsync(Book entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<ICollection<Book>> GetAllAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<PagedList<Book>> GetBooksAsync(BookParams bookParams)
+        public async Task<PagedList<Book>> GetBooksWithPaginationAsync(BookParams bookParams)
         {
             var books = _context.Books.OrderByDescending(book => book.PublishedDate).AsQueryable();
 
@@ -72,20 +47,10 @@ namespace DatingApp.API.Data
                                                      bookParams.PageSize);
         }
 
-        public async Task<Book> GetByIdAsync(int id)
-        {
-            var book = await _context.Books.Include("BookTags").FirstOrDefaultAsync(p => p.Id == id);
-            return book;
-        }
-
-        public Task<Book> GetByNameAsync(string name)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
+        // public async Task<Book> GetByIdAsync(int id)
+        // {
+        //     var book = await _context.Books.Include("BookTags").FirstOrDefaultAsync(p => p.Id == id);
+        //     return book;
+        // }
     }
 }

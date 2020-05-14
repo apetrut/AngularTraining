@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using DatingApp.API.Models;
 
 namespace DatingApp.API.Data
 {
-    public interface ITagRepository : IRepositoryAsync<Tag>
+    public interface ITagRepository : IGenericRepository<Tag>
     {
-         // Task<Tag> GetTag(string name);
+        Tag GetTag(string tagName);
     }
 }
