@@ -13,8 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace DatingApp.API
 {
@@ -30,7 +28,10 @@ namespace DatingApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(options => {
+                options.UseLazyLoadingProxies();
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 // options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -84,11 +85,15 @@ namespace DatingApp.API
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
+            // serve static files.
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
