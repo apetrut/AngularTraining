@@ -10,7 +10,19 @@ namespace DatingApp.API.Data
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected DataContext _context;
+        private DataContext _context;
+
+        protected DataContext GenericDataContext
+        {
+            get
+            {
+                return _context;
+            }
+            set
+            {
+                _context = value;
+            }
+        }
 
         public GenericRepository(DataContext context)
         {

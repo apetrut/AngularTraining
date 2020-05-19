@@ -14,7 +14,7 @@ namespace DatingApp.API.Data
         
         public async Task<PagedList<Book>> GetBooksWithPaginationAsync(BookParams bookParams)
         {
-            var books = _context.Books.OrderByDescending(book => book.PublishedDate).AsQueryable();
+            var books = GenericDataContext.Books.OrderByDescending(book => book.PublishedDate).AsQueryable();
 
             if (!string.IsNullOrEmpty(bookParams.Topic) && 
                 bookParams.Topic.ToLower() != "any" &&

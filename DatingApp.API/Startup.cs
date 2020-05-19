@@ -3,11 +3,15 @@ using System.Text;
 using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.Helpers;
+using DatingApp.API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,18 +32,41 @@ namespace DatingApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityBuilder identityBuilder = services.AddIdentityCore<User>(opt => {
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 4;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+            });
+
+            identityBuilder = new IdentityBuilder(identityBuilder.UserType, typeof(Role), identityBuilder.Services);
+
+            identityBuilder.AddEntityFrameworkStores<DataContext>();
+            identityBuilder.AddRoleValidator<RoleValidator<Role>>();
+            identityBuilder.AddRoleManager<RoleManager<Role>>();
+            identityBuilder.AddSignInManager<SignInManager<User>>();
+
             services.AddDbContext<DataContext>(options => {
-                options.UseLazyLoadingProxies();
+                // options.UseLazyLoadingProxies();
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddControllers().AddNewtonsoftJson(options =>
-            {
-                // options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+
+            services.AddControllers(options => {
+                var policy =  new AuthorizationPolicyBuilder()
+                                    .RequireAuthenticatedUser()
+                                    .Build();
+
+                options.Filters.Add(new AuthorizeFilter(policy));
+            })
+                    .AddNewtonsoftJson(options =>
+                    {
+                        // options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    }
+            );
+
             services.AddCors();
             services.AddAutoMapper(typeof(ProductRepository).Assembly);
-            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ITagRepository, TagRepository>();

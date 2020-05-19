@@ -10,7 +10,7 @@ namespace DatingApp.API.Data
 
         public Tag GetTag(string tagName)
         {
-            return _context.Tags.Include("BookTags").Include("ProductTags").FirstOrDefault(p => p.Name == tagName);
+            return GenericDataContext.Tags.Include("BookTags").Include("ProductTags").FirstOrDefault(p => p.Name == tagName);
         }
     }
 }
