@@ -14,6 +14,7 @@ import { BookEditInfoComponent } from './books/book-edit/book-edit-info.componen
 import { BookEditTagsComponent } from './books/book-edit/book-edit-tags.component';
 import { BookDetailResolver } from './_resolvers/book-detail.resolver';
 import { BookEditGuard } from './_guards/book-edit.guard';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export const bookRoutes: Routes = [
   { path: 'books',
@@ -50,9 +51,12 @@ export const bookRoutes: Routes = [
   }
 ];
 
-  // define the routes for this module.
+// define the routes for this module.
 export const productRoutes: Routes = [
-    { path: 'products', component: ProductListComponent, canActivate: [AuthGuard] },
+    { path: 'products',
+      component: ProductListComponent,
+      canActivate: [AuthGuard]
+    },
     { path: 'products/:id', component: ProductDetailComponent },
     {
       path: 'products/:id/edit',
@@ -66,6 +70,11 @@ export const productRoutes: Routes = [
 export const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'welcome', component: WelcomeComponent },
+    { path: 'admin',
+      component: AdminPanelComponent,
+      data: {roles: ['Admin', 'Moderator']},
+      canActivate: [AuthGuard]
+    },
     { path: '', redirectTo: 'welcome', pathMatch: 'full' },
     { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
   ];

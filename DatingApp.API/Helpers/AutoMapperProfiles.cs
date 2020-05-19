@@ -22,6 +22,7 @@ namespace DatingApp.API.Helpers
             CreateMap<UserForRegisterDTO, User>();
             CreateMap<User, UserForRegisterDTO>();
             CreateMap<User, UserForLoginDTO>();
+            CreateMap<UserWithRoles, UserForAdminRightsDTO>();
 
             CreateMap<Product, ProductForDetailDTO>()
                 .AfterMap( (productDb, productDto) => {

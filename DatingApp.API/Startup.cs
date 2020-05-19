@@ -68,8 +68,11 @@ namespace DatingApp.API
             services.AddCors();
             services.AddAutoMapper(typeof(ProductRepository).Assembly);
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
+
+            // authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options => {
                         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
@@ -80,6 +83,12 @@ namespace DatingApp.API
                                 ValidateIssuer = false,
                                 ValidateAudience = false
                             };
+            });
+
+            // authorization policies.
+            services.AddAuthorization(options => {
+                options.AddPolicy("RequiredAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("VIPOnly", policy => policy.RequireRole("VIP"));
             });
         }
 

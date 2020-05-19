@@ -20,6 +20,8 @@ import { BsDatepickerModule } from 'node_modules/ngx-bootstrap/datepicker';
 import { TabsModule } from 'node_modules/ngx-bootstrap/tabs';
 
 import { appRoutes } from './routes';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -29,7 +31,9 @@ export function tokenGetter() {
    declarations: [
       AppComponent,
       WelcomeComponent,
-      RegisterComponent
+      RegisterComponent,
+      AdminPanelComponent,
+      HasRoleDirective
    ],
    imports: [
       BrowserModule,

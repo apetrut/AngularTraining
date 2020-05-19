@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -63,7 +64,7 @@ namespace DatingApp.API.Controllers
                 var appUser = _mapper.Map<UserForLoginDTO>(user);
                 return Ok(new
                 {
-                    token = GenerateJwtToken(user),
+                    token = await GenerateJwtToken(user),
                     user = appUser
                 });
             }
@@ -71,13 +72,20 @@ namespace DatingApp.API.Controllers
             return Unauthorized();
         }
 
-        private string GenerateJwtToken(User user)
+        private async Task<string> GenerateJwtToken(User user)
         {
             // build a JWT token.
-            var claims = new[] {
+            var claims = new List<Claim> {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName)
             };
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             // key to sign the token.
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));

@@ -17,7 +17,7 @@ constructor(private bookService: BookService,
             private alertify: AlertifyService) { }
 
   // RouterStateSnapshot - a tree of activated route snapshots.
-  resolve(route: ActivatedRouteSnapshot): Observable<Book>{
+  resolve(route: ActivatedRouteSnapshot): Observable<Book> {
     return this.bookService.getBook(route.params.id)
     .pipe(
       catchError(err => {
