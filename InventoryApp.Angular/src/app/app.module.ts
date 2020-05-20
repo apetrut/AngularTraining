@@ -18,10 +18,15 @@ import { ErrorInterceptorProvider } from './_interceptors/errorInterceptor';
 import { BsDropdownModule } from 'node_modules/ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'node_modules/ngx-bootstrap/datepicker';
 import { TabsModule } from 'node_modules/ngx-bootstrap/tabs';
+import { ModalModule } from 'node_modules/ngx-bootstrap/modal';
 
 import { appRoutes } from './routes';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { AdminService } from './_services/admin.service';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -33,7 +38,10 @@ export function tokenGetter() {
       WelcomeComponent,
       RegisterComponent,
       AdminPanelComponent,
-      HasRoleDirective
+      HasRoleDirective,
+      UserManagementComponent,
+      PhotoManagementComponent,
+      RolesModalComponent
    ],
    imports: [
       BrowserModule,
@@ -46,6 +54,7 @@ export function tokenGetter() {
       BsDatepickerModule.forRoot(),
       ProductModule,
       BookModule,
+      ModalModule.forRoot(),
       TabsModule.forRoot(),
       JwtModule.forRoot({
          config: {
@@ -57,10 +66,14 @@ export function tokenGetter() {
   ],
   providers: [
     AuthService,
+    AdminService,
     ErrorInterceptorProvider,
     { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptor, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: LogResponseInterceptor, multi: true}
     // { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true}
+  ],
+  entryComponents: [
+   RolesModalComponent
   ],
   bootstrap: [AppComponent]
 })

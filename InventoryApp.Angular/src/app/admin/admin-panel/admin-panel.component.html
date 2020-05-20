@@ -1,3 +1,15 @@
-<p>
-  admin-panel works!
-</p>
+<div class="container mt-5">
+    <h2>Admin Panel</h2>
+<div class="tab-panel">
+   <tabset class="member-tabset">
+         <tab heading="User Management" *pmHasRole="['Admin']">
+             <div class="container">
+                <pm-user-management></pm-user-management>
+             </div>
+         </tab>
+         <tab heading="Photo Management" *pmHasRole="['Admin', 'Moderator']">
+            <pm-photo-management></pm-photo-management>
+         </tab>
+    </tabset>
+</div>
+</div>

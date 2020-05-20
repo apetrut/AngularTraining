@@ -6,5 +6,6 @@ export interface User {
   dateOfBirth: string;
   city: string;
   country: string;
+  roles?: string[];
 }
 
