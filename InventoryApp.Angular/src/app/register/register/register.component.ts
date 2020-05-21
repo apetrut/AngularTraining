@@ -32,6 +32,30 @@ export class RegisterComponent implements OnInit {
     this.createRegisterForm();
   }
 
+  get username() {
+    return this.registerForm.get('username');
+  }
+
+  get city() {
+    return this.registerForm.get('city');
+  }
+
+  get country() {
+    return this.registerForm.get('country');
+  }
+
+  get dateOfBirth() {
+    return this.registerForm.get('dateofbirth');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword');
+  }
+
   createRegisterForm() {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required]],
